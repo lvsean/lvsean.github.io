@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="LaMP learns a robust latent motion prior that enables optimization-based human motion generation, editing, blending, refinement, and collision avoidance."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <title>LaMP: Learning Robust Latent Motion Prior for Optimization-Based Human Motion Generation</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-container">
+        <a class="brand" href="#top">LaMP</a>
+        <nav aria-label="Primary navigation">
+          <a href="#overview">Overview</a>
+          <a href="#method">Method</a>
+          <a href="#results">Results</a>
+          <a href="#citation">Citation</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero page-container">
+        <h1>LaMP: Learning Robust Latent Motion Prior for Optimization-Based Human Motion Generation</h1>
+
+        <div class="authors" aria-label="Authors">
+          <a href="https://vlg.inf.ethz.ch/team/Xiaozhong-Lyu.html">Xiaozhong Lyu</a>
+          <a href="https://korrawe.github.io/">Korrawe Karunratanakul</a>
+          <a href="https://vlg.inf.ethz.ch/team/Kaifeng-Zhao.html">Kaifeng Zhao</a>
+          <a href="https://vlg.inf.ethz.ch/team/Prof-Dr-Siyu-Tang.html">Siyu Tang</a>
+        </div>
+
+        <p class="affiliations">ETH Zürich</p>
+        <p class="venue">International Conference on 3D Vision (3DV), 2026</p>
+
+        <div class="link-row">
+          <a class="project-link" href="https://ieeexplore.ieee.org/iel8/11533157/11533158/11533254.pdf" target="_blank" rel="noopener">Paper</a>
+          <a class="project-link" href="https://github.com/lvsean/LaMP" target="_blank" rel="noopener">Code</a>
+          <a class="project-link" href="#citation">BibTeX</a>
+        </div>
+      </section>
+
+      <section class="teaser-section page-container" aria-label="Teaser figure">
+        <figure>
+          <img
+            src="assets/images/teaser.png"
+            alt="LaMP provides a universal latent motion prior for motion blending, editing, collision avoidance, and refinement"
+          />
+          <figcaption>
+            Our proposed <strong>Latent Motion Prior (LaMP)</strong> framework provides a robust,
+            universal latent motion prior suitable for both text-to-motion generation and
+            optimization-based downstream tasks. <strong>Motion Blending:</strong> LaMP generates
+            a smooth transition (yellow) between two distinct input motions (blue), such as standing
+            and performing a cartwheel. <strong>Motion Editing:</strong> the model adapts a motion
+            sequence to reach a specific target position (red sphere). <strong>Collision
+            Avoidance:</strong> given an input motion that intersects with an obstacle (left), LaMP
+            optimizes the trajectory to avoid the obstacle while preserving the original motion
+            semantics (right). <strong>Motion Refinement:</strong> LaMP removes artifacts from a
+            noisy input (left) to produce a physically plausible, refined motion (right).
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="overview" class="content-section page-container">
+        <h2>Abstract</h2>
+        <div class="paper-text">
+          <p>
+            We present <strong>Latent Motion Prior (LaMP)</strong>, a novel framework for learning a
+            generalizable human motion prior that enables efficient optimization for a wide range of
+            motion-related tasks, including text-to-motion generation, motion editing, motion
+            blending, motion refinement, and environment-aware collision avoidance.
+          </p>
+          <p>
+            LaMP employs a body part-based encoder to learn a disentangled latent representation of
+            human motion, together with a masked training strategy that encourages the model to
+            capture the most informative structural and dynamic aspects of the motion. As a result,
+            LaMP produces a robust and expressive latent space that serves as a latent motion prior
+            across diverse downstream tasks.
+          </p>
+          <p>
+            We evaluate the learned representation on a wide range of optimization-based downstream
+            tasks. Experimental results show that the current families of text-to-motion models are
+            generally not suitable to serve as a motion prior, while LaMP consistently outperforms
+            the state-of-the-art methods across all optimization tasks.
+          </p>
+        </div>
+      </section>
+
+      <section id="method" class="content-section page-container">
+        <h2>Method</h2>
+        <figure>
+          <img
+            src="assets/images/method.png"
+            alt="LaMP architecture: masked motion autoencoder, latent diffusion model, and optimization-based downstream tasks"
+            loading="lazy"
+          />
+          <figcaption>
+            <strong>Approach overview of LaMP.</strong> Our key insight is that the quality of a
+            diffusion-based motion prior heavily depends on the structure of its latent space. A
+            part-based encoder preserves local kinematic detail while a spatial-temporal masking
+            strategy distills the most informative features from redundant raw motion, yielding a
+            compact yet expressive latent space.
+          </figcaption>
+        </figure>
+        <ol class="method-steps">
+          <li>
+            <strong>Stage (a) — Masked Motion Autoencoder.</strong> We first train a masked
+            autoencoder to learn a robust latent space for human motion. Each training sequence is
+            encoded using six part-based encoders and one full-body encoder that combines them.
+            During training, a portion of the motion sequence is randomly masked and the model
+            reconstructs it from the remaining visible parts.
+          </li>
+          <li>
+            <strong>Stage (b) — Latent Diffusion Model.</strong> We freeze the pretrained encoder to
+            map motion data into the latent space, then train a latent diffusion model following the
+            standard text-to-motion setting.
+          </li>
+          <li>
+            <strong>Stage (c) — Optimization-Based Downstream Tasks.</strong> The resulting model
+            serves as a general motion prior for downstream tasks — motion refinement, editing,
+            blending, and collision avoidance — where the desired motion is found by optimizing the
+            latent diffusion noise.
+          </li>
+        </ol>
+      </section>
+
+      <section id="results" class="content-section page-container">
+        <h2>Results</h2>
+
+        <article class="experiment">
+          <h3>Text-to-Motion Generation</h3>
+          <p>
+            On HumanML3D, LaMP achieves performance comparable to state-of-the-art diffusion models
+            for text-to-motion. While VQ-VAE-based methods obtain the best raw generation scores,
+            they cannot be optimized toward downstream objectives. In the tasks below we show that
+            although some diffusion baselines achieve higher text-to-motion metrics, their latent
+            distributions are far less robust for optimization — leading to failures on the
+            downstream motion tasks where LaMP excels.
+          </p>
+        </article>
+
+        <article class="experiment">
+          <h3>Motion Blending</h3>
+          <p>
+            Given a naïve concatenation of two distinct test motions, the goal is to generate a
+            smooth transition between them. LaMP produces natural transitions from its motion prior,
+            while EMDM fails to produce transition frames, MDM outputs unnatural poses, and MLD
+            misses the upcoming motion.
+          </p>
+          <figure class="video-comparison">
+            <p class="comparison-legend">
+              The two input motions are shown in <strong>blue</strong>; the generated transition is
+              shown in <strong>white/yellow</strong>. Each panel compares EMDM, MDM, MLD, and LaMP
+              (ours) on the same input.
+            </p>
+            <div class="video-stack">
+              <div class="result-video">
+                <video src="video/blending-1.mp4" poster="assets/images/blending-1.jpg" controls muted loop playsinline preload="metadata"></video>
+              </div>
+              <div class="result-video">
+                <video src="video/blending-2.mp4" poster="assets/images/blending-2.jpg" controls muted loop playsinline preload="metadata"></video>
+              </div>
+            </div>
+            <figcaption>
+              Two motion-blending examples. Only LaMP generates a coherent, natural transition
+              between the two input motions while preserving their style.
+            </figcaption>
+          </figure>
+        </article>
+
+        <article class="experiment">
+          <h3>Motion Refinement</h3>
+          <p>
+            Given a noisy input motion, refinement projects it back onto the motion prior to remove
+            artifacts and recover a realistic sequence. LaMP produces smooth results, whereas EMDM
+            still outputs noisy motion, MDM yields low-quality motion, and MLD loses pose details.
+          </p>
+          <figure class="video-comparison">
+            <p class="comparison-legend">
+              The noisy input motion is shown in <strong>blue</strong>; each method outputs the
+              refined motion. Panels compare EMDM, MDM, MLD, and LaMP (ours).
+            </p>
+            <div class="video-stack">
+              <div class="result-video">
+                <video src="video/refinement-1.mp4" poster="assets/images/refinement-1.jpg" controls muted loop playsinline preload="metadata"></video>
+              </div>
+              <div class="result-video">
+                <video src="video/refinement-2.mp4" poster="assets/images/refinement-2.jpg" controls muted loop playsinline preload="metadata"></video>
+              </div>
+            </div>
+            <figcaption>
+              Two motion-refinement examples. LaMP removes noise while staying faithful to the
+              original input, producing physically plausible, temporally smooth motion.
+            </figcaption>
+          </figure>
+        </article>
+
+        <article class="experiment">
+          <h3>Motion Editing</h3>
+          <p>
+            Given a test motion and a sampled target location, the task edits the motion so its
+            pelvis reaches the target while preserving the original motion style. LaMP reaches the
+            target while retaining the input style; MLD fails to reach the target, and MDM alters the
+            motion semantics. EMDM is excluded here because it is not invertible.
+          </p>
+          <figure class="video-comparison">
+            <p class="comparison-legend">
+              The input test motion is shown in <strong>white</strong> and the sampled target
+              location is the <strong>red dot</strong>. Panels compare MDM, MLD, and LaMP (ours).
+            </p>
+            <div class="video-stack">
+              <div class="result-video">
+                <video src="video/editing-1.mp4" poster="assets/images/editing-1.jpg" controls muted loop playsinline preload="metadata"></video>
+              </div>
+              <div class="result-video">
+                <video src="video/editing-2.mp4" poster="assets/images/editing-2.jpg" controls muted loop playsinline preload="metadata"></video>
+              </div>
+            </div>
+            <figcaption>
+              Two motion-editing examples. LaMP reaches the sampled target position while preserving
+              the semantics and style of the original motion.
+            </figcaption>
+          </figure>
+        </article>
+
+        <article class="experiment">
+          <h3>SDF Collision Avoidance</h3>
+          <p>
+            Given a test motion surrounded by obstacles, the task optimizes the motion to avoid
+            collisions while preserving its semantics. LaMP preserves the motion style and drives
+            the collision loss to zero. MLD lacks fine-grained control, and MDM avoids the obstacle
+            but produces floating artifacts.
+          </p>
+          <figure class="video-comparison">
+            <p class="comparison-legend">
+              The input test motion is shown in <strong>white</strong> and obstacles are the
+              <strong>yellow spheres</strong>. The per-method collision loss is annotated above each
+              panel (MLD, MDM, and LaMP, ours).
+            </p>
+            <div class="video-stack">
+              <div class="result-video">
+                <video src="video/collision-1.mp4" poster="assets/images/collision-1.jpg" controls muted loop playsinline preload="metadata"></video>
+              </div>
+              <div class="result-video">
+                <video src="video/collision-2.mp4" poster="assets/images/collision-2.jpg" controls muted loop playsinline preload="metadata"></video>
+              </div>
+            </div>
+            <figcaption>
+              Two collision-avoidance examples. LaMP steers the body clear of the obstacles
+              (collision loss 0.00) while keeping the original motion style intact.
+            </figcaption>
+          </figure>
+        </article>
+      </section>
+
+      <section id="citation" class="content-section page-container">
+        <h2>Citation</h2>
+        <div class="citation-block">
+          <button class="copy-button" type="button" data-copy-target="bibtex">Copy BibTeX</button>
+          <pre id="bibtex">@inproceedings{lyu2026lamp,
+  title     = {LaMP: Learning Robust Latent Motion Prior for
+               Optimization-Based Human Motion Generation},
+  author    = {Lyu, Xiaozhong and Karunratanakul, Korrawe and
+               Zhao, Kaifeng and Tang, Siyu},
+  booktitle = {International Conference on 3D Vision (3DV)},
+  year      = {2026}
+}</pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="page-container">
+        <p>LaMP: Learning Robust Latent Motion Prior for Optimization-Based Human Motion Generation</p>
+        <p>3DV 2026</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

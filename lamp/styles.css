@@ -1,0 +1,217 @@
+:root {
+  --text: #222222;
+  --muted: #60656b;
+  --link: #2767a8;
+  --border: #dcdfe3;
+  --light: #f6f7f8;
+  --width: 1040px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 74px; }
+body {
+  margin: 0;
+  color: var(--text);
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+}
+img { display: block; max-width: 100%; height: auto; }
+video { display: block; max-width: 100%; height: auto; background: #000000; }
+
+/*
+ * Reserve intrinsic space for every result video so the page height is stable
+ * before media loads, preventing reflow that would break smooth-scroll anchors.
+ * All composited slide videos are 2000x1124.
+ */
+.result-video video { aspect-ratio: 500 / 281; }
+a { color: var(--link); text-underline-offset: 3px; }
+.page-container { width: min(calc(100% - 40px), var(--width)); margin-inline: auto; }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--border);
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: min(calc(100% - 40px), var(--width));
+  min-height: 58px;
+  margin-inline: auto;
+}
+.brand { color: var(--text); font-size: 18px; font-weight: 700; text-decoration: none; }
+nav { display: flex; gap: 26px; }
+nav a { color: #3b3d40; font-size: 14px; text-decoration: none; }
+nav a:hover { color: var(--link); }
+
+.hero { padding-block: 70px 44px; text-align: center; }
+h1 {
+  max-width: 1000px;
+  margin: 0 auto 25px;
+  font-size: clamp(32px, 4.6vw, 50px);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+}
+.authors {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3px 20px;
+  margin-bottom: 9px;
+  font-size: 16px;
+}
+.authors a { text-decoration: none; }
+.authors a:hover { text-decoration: underline; }
+.affiliations { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+.venue { margin: 14px 0 22px; font-weight: 600; }
+.link-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+.project-link {
+  display: inline-block;
+  padding: 7px 14px;
+  color: var(--link);
+  background: white;
+  border: 1px solid var(--link);
+  border-radius: 3px;
+  font-size: 14px;
+  text-decoration: none;
+}
+.project-link.disabled { color: #6f7479; border-color: #aeb3b8; cursor: default; }
+
+.teaser-section { padding-block: 0 20px; }
+.teaser-section figure { margin-bottom: 0; }
+
+.content-section {
+  padding-block: 66px;
+  border-top: 1px solid var(--border);
+}
+h2 {
+  margin: 0 0 32px;
+  color: var(--text);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+}
+h3 {
+  margin: 0 0 13px;
+  color: var(--text);
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+figure { margin: 0 0 44px; }
+figure > img { width: 100%; }
+figure > video { width: 100%; }
+figcaption {
+  max-width: 940px;
+  margin: 13px auto 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+}
+.paper-text { max-width: 900px; margin-inline: auto; }
+.paper-text p { margin: 0 0 18px; text-align: justify; }
+.paper-text p:last-child { margin-bottom: 0; }
+#overview h2:not(:first-child) { margin-top: 60px; }
+
+.method-steps { max-width: 900px; margin: 0 auto; padding-left: 22px; }
+.method-steps li { margin-bottom: 10px; text-align: justify; }
+.method-steps li:last-child { margin-bottom: 0; }
+
+.experiment {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.experiment:first-of-type { border-top: 0; padding-top: 0; }
+.experiment p { margin: 0 0 22px; text-align: justify; }
+.experiment figure { margin: 26px 0 0; }
+.comparison-legend {
+  margin: 0 auto 14px;
+  max-width: 900px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+.video-stack { display: grid; gap: 18px; }
+.result-video video {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.metric-highlight {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  max-width: 900px;
+  margin: 0 auto 6px;
+}
+.metric-card {
+  flex: 1 1 200px;
+  min-width: 180px;
+  padding: 18px 16px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-align: center;
+}
+.metric-card .num { display: block; font-size: 26px; font-weight: 700; color: var(--link); }
+.metric-card .lbl { display: block; margin-top: 4px; font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+.citation-block { position: relative; max-width: 850px; margin: 0 auto; }
+.citation-block pre {
+  overflow-x: auto;
+  margin: 0;
+  padding: 52px 24px 24px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font: 13px/1.7 "Courier New", monospace;
+}
+.copy-button {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  padding: 5px 9px;
+  color: var(--link);
+  background: white;
+  border: 1px solid var(--link);
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.copy-button:hover { color: white; background: var(--link); }
+
+.site-footer { padding-block: 28px; color: var(--muted); background: var(--light); border-top: 1px solid var(--border); }
+.site-footer .page-container { display: flex; justify-content: space-between; gap: 24px; }
+.site-footer p { margin: 0; font-size: 12px; }
+
+@media (max-width: 700px) {
+  .page-container, .nav-container { width: min(calc(100% - 28px), var(--width)); }
+  nav { gap: 14px; }
+  nav a { font-size: 12px; }
+  .hero { padding-block: 50px 36px; }
+  h1 { font-size: 30px; }
+  .content-section { padding-block: 50px; }
+  h2 { font-size: 27px; }
+  h3 { font-size: 20px; }
+  .paper-text p, .experiment p, .method-steps li { text-align: left; }
+  .site-footer .page-container { flex-direction: column; gap: 3px; }
+}
+
+@media (max-width: 480px) {
+  .brand { display: none; }
+  .nav-container { justify-content: center; }
+  nav { width: 100%; justify-content: space-between; }
+  h1 { font-size: 26px; }
+}

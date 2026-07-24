@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xiaozhong Lyu</title>
+    <meta name="description" content="Xiaozhong Lyu — Ph.D. student in Computer Science at the Computer Vision and Learning Group (VLG), ETH Zürich." />
+    <!--
+      Template adapted from Siwei Zhang's (https://sanweiliti.github.io/) academic homepage.
+    -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="intro">
+        <div class="intro-photo">
+          <img src="assets/xiaozhong.jpg" alt="Xiaozhong Lyu" />
+        </div>
+        <div class="intro-body">
+          <h1>Xiaozhong Lyu</h1>
+          <p class="role">Ph.D. Student, Computer Vision and Learning Group (VLG), ETH Zürich</p>
+          <p>
+            I am a Ph.D. student in Computer Science at the
+            <a href="https://vlg.inf.ethz.ch/" target="_blank" rel="noopener">Computer Vision and Learning Group (VLG)</a>,
+            ETH Zürich, supervised by Professor
+            <a href="https://vlg.inf.ethz.ch/team/Prof-Dr-Siyu-Tang.html" target="_blank" rel="noopener">Siyu Tang</a>.
+            Before this, I received my M.S. in Computer Science from ETH Zürich in 2022. Previous to
+            that, I graduated from the Computer Science Department at Peking University in 2020.
+          </p>
+          <p>
+            My research interests lie in human motion generation and egocentric 4D reconstruction.
+          </p>
+          <nav class="links">
+            <a href="mailto:xiaozhong.lyu@inf.ethz.ch">Email</a>
+            <a href="https://scholar.google.com/citations?hl=en&amp;user=EzNO5AIAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+            <a href="https://github.com/lvsean" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://vlg.inf.ethz.ch/team/Xiaozhong-Lyu.html" target="_blank" rel="noopener">VLG Page</a>
+          </nav>
+        </div>
+      </header>
+
+      <section id="news">
+        <h2>News</h2>
+        <div class="news">
+          <dl>
+            <dt>06/2026</dt>
+            <dd><strong>ReViV</strong> is accepted at ECCV 2026.</dd>
+            <dt>09/2025</dt>
+            <dd><strong>LaMP</strong> is accepted at 3DV 2026.</dd>
+            <dt>03/2024</dt>
+            <dd><strong>EgoGen</strong> is accepted at CVPR 2024 as an Oral presentation.</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section id="publications">
+        <h2>Publications</h2>
+
+        <article class="pub">
+          <div class="pub-thumb">
+            <img src="assets/publications/reviv.jpg" alt="ReViV teaser" loading="lazy" />
+          </div>
+          <div class="pub-info">
+            <p class="pub-title">
+              <a href="https://reviv4d.github.io/" target="_blank" rel="noopener">ReViV: Reconstructing the Viewer and the View in 4D from Monocular Egocentric Video</a>
+            </p>
+            <p class="pub-authors">
+              <span class="me">Xiaozhong Lyu</span>*, Gen Li*, Zhiyin Qian, Xucong Zhang, Marc Pollefeys, Siyu Tang
+            </p>
+            <p class="pub-venue">European Conference on Computer Vision (ECCV), 2026 &nbsp;<span style="color:var(--muted)">(*equal contribution)</span></p>
+            <p class="pub-links">
+              <a href="https://arxiv.org/abs/2607.17790" target="_blank" rel="noopener">Paper</a>
+              <span class="sep">/</span>
+              <a href="https://reviv4d.github.io/" target="_blank" rel="noopener">Project Page</a>
+              <span class="sep">/</span>
+              <a href="https://github.com/lvsean/reviv4d" target="_blank" rel="noopener">Code</a>
+            </p>
+            <p class="pub-desc">
+              ReViV reconstructs viewer-centric human motion (body, hand, and gaze) and view-centric
+              scene geometry (camera and depth) from a single egocentric RGB video in a unified
+              feed-forward model.
+            </p>
+          </div>
+        </article>
+
+        <article class="pub">
+          <div class="pub-thumb">
+            <img src="assets/publications/lamp.jpg" alt="LaMP teaser" loading="lazy" />
+          </div>
+          <div class="pub-info">
+            <p class="pub-title">
+              <a href="lamp/index.html">LaMP: Learning Robust Latent Motion Prior for Optimization-Based Human Motion Generation</a>
+            </p>
+            <p class="pub-authors">
+              <span class="me">Xiaozhong Lyu</span>, Korrawe Karunratanakul, Kaifeng Zhao, Siyu Tang
+            </p>
+            <p class="pub-venue">International Conference on 3D Vision (3DV), 2026</p>
+            <p class="pub-links">
+              <a href="https://ieeexplore.ieee.org/iel8/11533157/11533158/11533254.pdf" target="_blank" rel="noopener">Paper</a>
+              <span class="sep">/</span>
+              <a href="lamp/index.html">Project Page</a>
+              <span class="sep">/</span>
+              <a href="https://github.com/lvsean/LaMP" target="_blank" rel="noopener">Code</a>
+            </p>
+            <p class="pub-desc">
+              LaMP learns a robust latent motion prior with a part-based masked autoencoder,
+              enabling optimization-based motion editing, blending, refinement, and collision
+              avoidance.
+            </p>
+          </div>
+        </article>
+
+        <article class="pub">
+          <div class="pub-thumb">
+            <img src="assets/publications/egogen.jpg" alt="EgoGen teaser" loading="lazy" />
+          </div>
+          <div class="pub-info">
+            <p class="pub-title">
+              <a href="https://ego-gen.github.io/" target="_blank" rel="noopener">EgoGen: An Egocentric Synthetic Data Generator</a>
+            </p>
+            <p class="pub-authors">
+              Gen Li, Kaifeng Zhao, Siwei Zhang, <span class="me">Xiaozhong Lyu</span>, Mihai Dusmanu, Yan Zhang, Marc Pollefeys, Siyu Tang
+            </p>
+            <p class="pub-venue">
+              Conference on Computer Vision and Pattern Recognition (CVPR), 2024
+              &nbsp;<span class="award">Oral</span>
+            </p>
+            <p class="pub-links">
+              <a href="https://arxiv.org/pdf/2401.08739.pdf" target="_blank" rel="noopener">Paper</a>
+              <span class="sep">/</span>
+              <a href="https://ego-gen.github.io/" target="_blank" rel="noopener">Project Page</a>
+              <span class="sep">/</span>
+              <a href="https://github.com/ligengen/EgoGen" target="_blank" rel="noopener">Code</a>
+            </p>
+            <p class="pub-desc">
+              EgoGen is a new synthetic data generator that produces accurate and rich ground-truth
+              training data for egocentric perception tasks.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="services">
+        <h2>Services</h2>
+        <p><strong>Reviewer:</strong> CVPR, ECCV, NeurIPS, 3DV.</p>
+        <p>
+          <strong>Teaching Assistant, ETH Zürich:</strong> Advanced Machine Learning (WS 2023),
+          Digital Human (SS 2024 &amp; SS 2026), Computer Science (WS 2024 &amp; SS 2025),
+          Visual Computing (WS 2025).
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        © Xiaozhong Lyu. Template adapted from
+        <a href="https://sanweiliti.github.io/" target="_blank" rel="noopener">Siwei Zhang</a>'s homepage.
+      </p>
+    </footer>
+  </body>
+</html>
